@@ -50,6 +50,22 @@ function Admin() {
     }
   }, []);
 
+  function fillData(link) {
+    fetch("http://192.168.0.102:3000/scrape", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ url: link }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        document.getElementById("name").value = data.name;
+        document.getElementById("description").value = data.description;
+      })
+      .catch((error) => console.error(error));
+  }
+
   if (!user) return <Login setUser={setUser} />;
 
   return (
@@ -69,6 +85,7 @@ function Admin() {
                 Registration Link
               </label>
               <input
+                onChange={(e) => fillData(e.target.value)}
                 type="url"
                 name="registrationLink"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
@@ -108,12 +125,15 @@ function Admin() {
                 required
                 name="collegeId"
                 id="category"
+                defaultValue=""
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               >
                 {colleges.map((college, index) => (
-                  <option value={index}>{college}</option>
+                  <option key={index} value={index}>
+                    {college}
+                  </option>
                 ))}
-                <option selected disabled value="">
+                <option disabled value="">
                   Select category
                 </option>
               </select>
@@ -131,9 +151,10 @@ function Admin() {
                 required
                 name="eventMode"
                 id="eventMode"
+                defaultValue=""
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               >
-                <option selected disabled value="">
+                <option disabled value="">
                   Select category
                 </option>
                 <option value="online">Online</option>
@@ -153,9 +174,10 @@ function Admin() {
                 required
                 name="typeOfEvent"
                 id="typeOfEvent"
+                defaultValue=""
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               >
-                <option selected disabled value="">
+                <option disabled value="">
                   Select category
                 </option>
                 <option value="hackathon">Hackathon</option>
@@ -175,9 +197,10 @@ function Admin() {
               <select
                 name="eventFeeType"
                 id="eventFeeType"
+                defaultValue=""
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               >
-                <option selected disabled value="">
+                <option disabled value="">
                   Select category
                 </option>
                 <option value="free">Free</option>
