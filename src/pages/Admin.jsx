@@ -51,7 +51,7 @@ function Admin() {
   }, []);
 
   function fillData(link) {
-    fetch("http://192.168.0.102:3000/scrape", {
+    fetch("https://event-radar.herokuapp.com/scrape", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
