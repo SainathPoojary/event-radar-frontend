@@ -18,7 +18,7 @@ function App() {
         <Route path="/colleges" element={<Colleges />} />
         <Route path="/event" element={<Event />} />
         <Route path="/college" element={<College />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/addEvent" element={<Admin />} />
       </Routes>
     </>
   );
