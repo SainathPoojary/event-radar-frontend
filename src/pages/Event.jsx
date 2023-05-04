@@ -65,7 +65,15 @@ function Event() {
                 .replace(/-|:|\.\d+/g, "");
               const endDateTime = date2.toISOString().replace(/-|:|\.\d+/g, "");
               window.open(
-                `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${event.name}&dates=${startDateTime}%2F${endDateTime}&details=${event.description}&location=${event.venue}`,
+                `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+                  event.name
+                )}&dates=${encodeURIComponent(
+                  startDateTime
+                )}%2F${encodeURIComponent(
+                  endDateTime
+                )}&details=${encodeURIComponent(
+                  event.description
+                )}&location=${encodeURIComponent(event.venue)}`,
                 "_blank"
               );
             }}
