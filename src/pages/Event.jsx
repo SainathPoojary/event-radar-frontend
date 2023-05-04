@@ -59,7 +59,16 @@ function Event() {
             Register
           </button>
           <button
-            onClick={() => navigate("/colleges")}
+            onClick={() => {
+              const startDateTime = date1
+                .toISOString()
+                .replace(/-|:|\.\d+/g, "");
+              const endDateTime = date2.toISOString().replace(/-|:|\.\d+/g, "");
+              window.open(
+                `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${event.name}&dates=${startDateTime}%2F${endDateTime}&details=${event.description}&location=${event.venue}`,
+                "_blank"
+              );
+            }}
             className="mt-3 shadow-4xl w-full rounded-xl bg-indigo-100 py-4 px-6 font-medium text-black transition duration-200 ease-in-out hover:bg-indigo-200 "
           >
             Add to Calendar
